@@ -9,7 +9,6 @@ import TabBarIcon from "../components/TabBarIcon";
 import PostsScreen from "../screens/PostsScreen";
 import UserScreen from "../screens/UserScreen";
 import AboutScreen from "../screens/AboutScreen";
-import PollScreen from "../screens/PollScreen";
 import ResultScreen from "../screens/ResultScreen";
 import NewPollScreen from "../screens/NewPollScreen";
 
@@ -55,7 +54,6 @@ PostsStack.navigationOptions = {
 const UserStack = createStackNavigator(
   {
     Me: UserScreen,
-    Poll: PollScreen,
     NewPoll: NewPollScreen
   },
   {
