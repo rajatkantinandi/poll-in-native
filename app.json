@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Poll-in",
+    "description": "@freeCodeCamp Voting app",
+    "slug": "poll-in",
+    "privacy": "public",
+    "sdkVersion": "28.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rajatkn.pollin"
+    },
+    "android": {
+      "package": "com.rajatkn.pollin"
+    }
+  }
+}
