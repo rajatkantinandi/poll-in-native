@@ -4,8 +4,10 @@ import { Icon } from "expo";
 import Option from "./Option";
 import StyledBtn from "./StyledBtn";
 import PollTitle from "./PollTitle";
+import Prompt from "rn-prompt";
 export default class Poll extends React.Component {
   state = {
+    promptVisible: false,
     voting: "not done",
     checked: -1,
     ...this.props.poll
@@ -57,10 +59,28 @@ export default class Poll extends React.Component {
       { cancelable: true }
     );
   };
+  addOption = async option => {
+    this.setState({
+      promptVisible: false
+    });
+    const response = await fetch(
+      "https://poll-in.herokuapp.com/update-poll?id=" +
+        this.state["_id"] +
+        "&option=" +
+        option
+    );
+    if (response.ok) {
+      this.setState({
+        options: [...this.state.options, { value: option, votes: 1 }],
+        totalvotes: this.state.totalvotes + 1
+      });
+      alert("updated");
+    } else alert("Error");
+  };
   render() {
     const { createdBy, totalvotes, question, options, at } = this.state;
     const moreOptions = ["Add Option"];
-    const moreActions = [null];
+    const moreActions = [() => this.setState({ promptVisible: true })];
     if (this.props.authUser == createdBy) {
       moreOptions.push("Delete");
       moreActions.push(this.deletePoll);
@@ -131,7 +151,7 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
             title={`Result`}
             icon={<Icon.Ionicons color="#ddd" size={25} name="ios-pie" />}
             onPress={() => {
-              this.props.navigation.push("Result", { ...this.state });
+              this.props.navigation.navigate("Result", { ...this.state });
             }}
           />
           <StyledBtn
@@ -144,6 +164,20 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
             }}
           />
         </View>
+        <Prompt
+          title="Add new Option"
+          placeholder="Type a new Option"
+          defaultValue=""
+          visible={this.state.promptVisible}
+          onCancel={() =>
+            this.setState({
+              promptVisible: false
+            })
+          }
+          onSubmit={async value => {
+            await this.addOption(value);
+          }}
+        />
       </View>
     );
   }

@@ -20,7 +20,6 @@ const PostsStack = createStackNavigator(
   },
   {
     initialRouteName: "Posts",
-    /* The header config from HomeScreen is now here */
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#e6e6fa",
@@ -54,11 +53,11 @@ PostsStack.navigationOptions = {
 const UserStack = createStackNavigator(
   {
     Me: UserScreen,
+    Result: ResultScreen,
     NewPoll: NewPollScreen
   },
   {
     initialRouteName: "Me",
-    /* The header config from HomeScreen is now here */
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#e6e6fa",

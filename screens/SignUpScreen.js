@@ -12,14 +12,17 @@ export default class SignUpScreen extends React.Component {
     username: "",
     password: "",
     repeatPassword: "",
-    activity: false
+    activity: false,
+    validUserName: false
   };
   signupAction = async () => {
     const { username, password, repeatPassword } = this.state;
     if (!username) alert("Username must not be empty");
-    else if (!password) alert("Password must not be empty");
     else if (username.length < 5)
       alert("username must be atleast 5 characters long");
+    else if (!validUserName)
+      alert("Username is not available please choose a different one");
+    else if (!password) alert("Password must not be empty");
     else if (!password.match(/\w{8}\w*/))
       alert(
         "Password must be 8 characters long & should contain only letters & numbers"
@@ -53,6 +56,18 @@ export default class SignUpScreen extends React.Component {
       }
     }
   };
+  validateUser = async username => {
+    this.setState({ username });
+    if (username.length < 5) {
+      this.setState({ validUserName: false });
+    } else {
+      const response = await fetch(
+        "https://poll-in.herokuapp.com/checkavailuser/" + username
+      );
+      if (response.ok) this.setState({ validUserName: true });
+      else this.setState({ validUserName: false });
+    }
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -62,11 +77,26 @@ export default class SignUpScreen extends React.Component {
           placeholder="Choose an Username"
           color="white"
           autoCapitalize="none"
-          onChangeText={username => this.setState({ username })}
+          onChangeText={async username => {
+            await this.validateUser(username);
+          }}
           icon={
             <Icon.FontAwesome name="user-circle" size={30} color={"white"} />
           }
         />
+        {this.state.validUserName ? (
+          <Text
+            style={[styles.hint, { color: "green", backgroundColor: "white" }]}
+          >
+            ✅ Username Available
+          </Text>
+        ) : (
+          <Text
+            style={[styles.hint, { color: "red", backgroundColor: "white" }]}
+          >
+            x Username Unvailable
+          </Text>
+        )}
         <StyledInput
           bgColor="#335"
           placeholder="Choose a Password"
@@ -109,6 +139,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     textAlign: "center",
-    margin: 5
+    margin: 5,
+    padding: 5
   }
 });

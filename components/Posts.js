@@ -56,7 +56,7 @@ export default class Posts extends React.Component {
         this.setState({ posts, loading: false });
       }
       alert("Posted !!");
-    } else alert("Error");
+    } else alert("Error" + response.status);
   };
   deletePoll = async pollid => {
     const responseDelete = await fetch(

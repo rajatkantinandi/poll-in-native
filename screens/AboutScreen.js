@@ -10,9 +10,11 @@ export default class SettingsScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>About</Text>
-        <Text style={styles.p}>Version 1.0</Text>
+        <Text style={styles.p}>Version 1.1.0</Text>
         <Text style={styles.p}>Created on 30.07.18</Text>
-        <Text style={styles.p}> - By Rajat Kanti Nandi (@rajatkantinandi)</Text>
+        <Text style={styles.p}>
+          - Rajat Kanti Nandi (https://twitter.com/@rajatkantinandi)
+        </Text>
       </View>
     );
   }
