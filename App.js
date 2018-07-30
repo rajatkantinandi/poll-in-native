@@ -31,7 +31,7 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <this.state.appNavigator/>
+          <this.state.appNavigator />
         </View>
       );
     }
@@ -59,9 +59,9 @@ export default class App extends React.Component {
   _handleFinishLoading = async () => {
     const username = await AsyncStorage.getItem("authUser");
     const userId = await AsyncStorage.getItem("authUserId");
-    let initialRoute="Login"
-    if (username != null && userId != null) {
-      intialRoute = "Main";
+    let alpha = "Login";
+    if (username && userId) {
+      alpha = "Main";
     }
     this.setState({
       isLoadingComplete: true,
@@ -71,7 +71,7 @@ export default class App extends React.Component {
           Main: MainTabNavigator
         },
         {
-          initialRouteName: initialRoute
+          initialRouteName: alpha
         }
       )
     });
