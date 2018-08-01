@@ -112,7 +112,7 @@ export default class Posts extends React.Component {
           <ActionButton.Item
             buttonColor="blue"
             title="Refresh"
-            onPress={() => this.refresh()}
+            onPress={async () => await this.refresh()}
           >
             <Icon.Ionicons name="md-refresh" color="white" size={25} />
           </ActionButton.Item>

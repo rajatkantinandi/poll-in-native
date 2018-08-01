@@ -77,6 +77,9 @@ export default class Poll extends React.Component {
       alert("updated");
     } else alert("Error");
   };
+  componentWillReceiveProps = nextProps => {
+    this.setState({ ...nextProps.poll });
+  };
   render() {
     const { createdBy, totalvotes, question, options, at } = this.state;
     const moreOptions = ["Add Option"];
