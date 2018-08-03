@@ -5,6 +5,9 @@ import Option from "./Option";
 import StyledBtn from "./StyledBtn";
 import PollTitle from "./PollTitle";
 import Prompt from "rn-prompt";
+import RequestApi from "../constants/RequestApi";
+import { Colors } from "../constants/Colors";
+
 export default class Poll extends React.Component {
   state = {
     promptVisible: false,
@@ -15,16 +18,9 @@ export default class Poll extends React.Component {
   vote = async () => {
     if (this.state.checked >= 0) {
       this.setState({ voting: "progress" });
-      const response = await fetch("https://poll-in.herokuapp.com/vote", {
-        method: "POST",
-        body: JSON.stringify({
-          id: this.state["_id"],
-          poll: this.state.options[this.state.checked].value
-        }),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
+      const response = await RequestApi("vote", {
+        id: this.state["_id"],
+        poll: this.state.options[this.state.checked].value
       });
       if (response.ok) {
         const options = this.state.options.map((elem, index) => {
@@ -63,12 +59,7 @@ export default class Poll extends React.Component {
     this.setState({
       promptVisible: false
     });
-    const response = await fetch(
-      "https://poll-in.herokuapp.com/update-poll?id=" +
-        this.state["_id"] +
-        "&option=" +
-        option
-    );
+    const response = await RequestApi("addOption", [this.state["_id"], option]);
     if (response.ok) {
       this.setState({
         options: [...this.state.options, { value: option, votes: 1 }],
@@ -103,7 +94,7 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
           }
         />
         <View>
-          <Text style={{ fontSize: 21, paddingBottom: 10 }}>{question}</Text>
+          <Text style={{ fontSize: 16, paddingBottom: 4 }}>{question}</Text>
         </View>
         <View>
           {options.map((option, index) => (
@@ -120,48 +111,66 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
           style={{
             flex: 0,
             flexDirection: "row",
-            justifyContent: "flex-start",
-            marginTop: 5
+            justifyContent: "center",
+            marginTop: 2
           }}
         >
           {this.state.voting == "not done" ? (
             <StyledBtn
-              bgcolor="#483"
-              txtColor="#ddd"
-              icon={<Icon.Foundation color="#ddd" size={25} name="like" />}
+              bgcolor={Colors.voteBtnbg}
+              txtColor={Colors.primaryText}
+              icon={
+                <Icon.Foundation
+                  color={Colors.iconColor}
+                  size={25}
+                  name="like"
+                />
+              }
               title={`Vote (${totalvotes})`}
               onPress={this.vote}
             />
           ) : this.state.voting == "progress" ? (
             <StyledBtn
-              bgcolor="#181"
-              txtColor="#ddd"
+              bgcolor={Colors.voteBtnbg}
+              txtColor={Colors.primaryText}
               activity={true}
               title={`Voting...`}
               onPress={null}
             />
           ) : (
             <StyledBtn
-              bgcolor="#445"
-              txtColor="#ddd"
+              bgcolor={Colors.donebg}
+              txtColor={Colors.primaryText}
               title={`✅ Done  (${totalvotes})`}
               onPress={null}
             />
           )}
           <StyledBtn
-            bgcolor="#348"
-            txtColor="#ddd"
+            bgcolor={Colors.resultBtnbg}
+            txtColor={Colors.primaryText}
             title={`Result`}
-            icon={<Icon.Ionicons color="#ddd" size={25} name="ios-pie" />}
+            icon={
+              <Icon.Ionicons
+                color={Colors.iconColor}
+                size={25}
+                name="ios-pie"
+              />
+            }
             onPress={() => {
               this.props.navigation.navigate("Result", { ...this.state });
             }}
           />
           <StyledBtn
-            bgcolor="#388"
-            txtColor="#ddd"
+            bgcolor={Colors.shareBtnbg}
+            txtColor={Colors.primaryText}
             title={`Share`}
-            icon={<Icon.Ionicons color="#ddd" size={25} name="ios-share-alt" />}
+            icon={
+              <Icon.Ionicons
+                color={Colors.iconColor}
+                size={25}
+                name="ios-share-alt"
+              />
+            }
             onPress={() => {
               Share.share({ message: shareMsg, title: "Poll-in Poll" });
             }}
@@ -188,15 +197,14 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    backgroundColor: "#eef",
-    padding: 5,
-    borderRadius: 5,
-    borderColor: "indigo",
+    margin: 4,
+    backgroundColor: Colors.lightbg,
+    padding: 2,
+    borderRadius: 3,
+    borderColor: Colors.fancyBorder,
     borderWidth: 1
   },
   txt: {
-    fontSize: 18,
-    paddingLeft: 5
+    paddingLeft: 2
   }
 });

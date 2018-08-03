@@ -4,6 +4,7 @@ import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
+import { Colors } from "../constants/Colors";
 
 import TabBarIcon from "../components/TabBarIcon";
 import PostsScreen from "../screens/PostsScreen";
@@ -22,14 +23,14 @@ const PostsStack = createStackNavigator(
     initialRouteName: "Posts",
     navigationOptions: {
       headerStyle: {
-        backgroundColor: "#e6e6fa",
-        height: 50,
-        padding: 15
+        backgroundColor: Colors.titleBarbg,
+        height: 35,
+        padding: 5
       },
-      headerTintColor: "#333",
+      headerTintColor: Colors.headerTintColor,
       headerTitleStyle: {
         fontWeight: "bold",
-        fontSize: 25,
+        fontSize: 18,
         fontFamily: "monospace"
       }
     }
@@ -60,14 +61,14 @@ const UserStack = createStackNavigator(
     initialRouteName: "Me",
     navigationOptions: {
       headerStyle: {
-        backgroundColor: "#e6e6fa",
-        height: 50,
-        padding: 15
+        backgroundColor: Colors.titleBarbg,
+        height: 35,
+        padding: 5
       },
-      headerTintColor: "#333",
+      headerTintColor: Colors.headerTintColor,
       headerTitleStyle: {
         fontWeight: "bold",
-        fontSize: 25,
+        fontSize: 18,
         fontFamily: "monospace"
       }
     }
@@ -96,9 +97,15 @@ const AboutStack = createStackNavigator(
     initialRouteName: "About",
     navigationOptions: {
       headerStyle: {
-        backgroundColor: "#e6e6fa",
-        height: 55,
-        padding: 15
+        backgroundColor: Colors.titleBarbg,
+        height: 45,
+        padding: 5
+      },
+      headerTintColor: Colors.headerTintColor,
+      headerTitleStyle: {
+        fontWeight: "bold",
+        fontSize: 18,
+        fontFamily: "monospace"
       }
     }
   }

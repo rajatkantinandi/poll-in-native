@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { VictoryPie, VictoryTheme, VictoryLegend } from "victory-native";
+import { Colors } from "../constants/Colors";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -26,7 +27,7 @@ export default class HomeScreen extends React.Component {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 20
+            marginTop: 10
           }}
         >
           <VictoryPie
@@ -35,7 +36,7 @@ export default class HomeScreen extends React.Component {
             radius={120}
             theme={VictoryTheme.material}
             style={{
-              labels: { fill: "#fff", fontWeight: "bold", fontSize: 17 }
+              labels: { fill: Colors.lightbg, fontWeight: "bold", fontSize: 13 }
             }}
             labelRadius={80}
             labels={d => d.y + "%"}
@@ -49,7 +50,7 @@ export default class HomeScreen extends React.Component {
             data={data.map(elem => ({
               name: elem.x
             }))}
-            padding={30}
+            padding={15}
           />
         </View>
       </View>
@@ -60,14 +61,15 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: Colors.lightbg
   },
   heading: {
-    fontSize: 30,
-    color: "maroon"
+    padding: 5,
+    fontSize: 18,
+    color: Colors.impTxt
   },
   heading2: {
-    fontSize: 20,
-    color: "grey"
+    paddingLeft: 8,
+    color: Colors.secondaryTxt
   }
 });

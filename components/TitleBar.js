@@ -1,5 +1,7 @@
 import React from "react";
 import { View, Image } from "react-native";
+import { Colors } from "../constants/Colors";
+
 export default () => {
   return (
     <View
@@ -8,8 +10,8 @@ export default () => {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        backgroundColor: "#e6e6fa",
-        padding: 8
+        backgroundColor: Colors.titleBarbg,
+        padding: 4
       }}
     >
       <Image

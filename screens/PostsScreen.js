@@ -1,9 +1,8 @@
 import React from "react";
-import { StyleSheet, AsyncStorage } from "react-native";
-import Poll from "../components/Poll";
-import ActionButton from "react-native-action-button";
-import { Icon } from "expo";
+import { AsyncStorage } from "react-native";
 import Posts from "../components/Posts";
+import RequestApi from "../constants/RequestApi";
+
 export default class HomeScreen extends React.Component {
   state = {
     authUser: null,
@@ -29,12 +28,7 @@ export default class HomeScreen extends React.Component {
     }
   };
   fetchPosts = async () => {
-    const response = await fetch(
-      "https://poll-in.herokuapp.com/trending-polls",
-      {
-        method: "GET"
-      }
-    );
+    const response = await RequestApi("trendingPolls");
     if (response.ok) {
       const result = await response.json();
       return result;
@@ -58,22 +52,3 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#112"
-  },
-  heading: {
-    fontSize: 30,
-    color: "lime",
-    marginLeft: 15
-  },
-  loader: {
-    flex: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 10
-  }
-});

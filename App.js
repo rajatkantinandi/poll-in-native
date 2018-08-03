@@ -10,8 +10,8 @@ import { AppLoading, Asset, Font, Icon, Constants } from "expo";
 import { createSwitchNavigator } from "react-navigation";
 // import AppNavigator from "./navigation/AppNavigator";
 import MainTabNavigator from "./navigation/MainTabNavigator";
+import { Colors } from "./constants/Colors";
 import LoginTabNavigator from "./navigation/LoginTabNavigator";
-
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -81,7 +81,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.lightbg,
     marginTop: Constants.statusBarHeight
   }
 });

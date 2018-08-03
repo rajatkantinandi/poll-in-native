@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, Button, View, AsyncStorage } from "react-native";
 import Posts from "../components/Posts";
+import RequestApi from "../constants/RequestApi";
+import { Colors } from "../constants/Colors";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -30,12 +32,7 @@ export default class HomeScreen extends React.Component {
   };
   fetchPosts = async () => {
     await this.fetchAuthUser();
-    const response = await fetch(
-      "https://poll-in.herokuapp.com/u/" + this.state.authUserId,
-      {
-        method: "GET"
-      }
-    );
+    const response = await RequestApi("userpage", this.state.authUserId);
     if (response.ok) {
       const result = await response.json();
       return result.polls.reverse();
@@ -82,13 +79,13 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: Colors.lightbg
   },
   heading: {
-    fontSize: 20,
-    color: "grey",
+    fontSize: 15,
+    color: Colors.secondaryTxt,
     textAlign: "center",
-    padding: 10,
+    padding: 5,
     fontFamily: "sans-serif",
     fontWeight: "bold"
   }

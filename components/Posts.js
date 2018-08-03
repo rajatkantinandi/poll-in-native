@@ -10,6 +10,8 @@ import {
 import Poll from "./Poll";
 import ActionButton from "react-native-action-button";
 import { Icon } from "expo";
+import RequestApi from "../constants/RequestApi";
+import { Colors } from "../constants/Colors";
 
 export default class Posts extends React.Component {
   state = {
@@ -35,21 +37,11 @@ export default class Posts extends React.Component {
   };
   addNewPoll = async (question, numOfOptions, optionsObj) => {
     const data = {
-      method: "POST",
-      body: JSON.stringify({
-        question: question,
-        numOfOptions: numOfOptions,
-        ...optionsObj
-      }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
+      question: question,
+      numOfOptions: numOfOptions,
+      ...optionsObj
     };
-    const response = await fetch(
-      "https://poll-in.herokuapp.com/create-poll",
-      data
-    );
+    const response = await RequestApi("newPoll", data);
     if (response.ok) {
       const posts = await this.props.fetchPosts();
       if (posts) {
@@ -59,12 +51,10 @@ export default class Posts extends React.Component {
     } else alert("Error" + response.status);
   };
   deletePoll = async pollid => {
-    const responseDelete = await fetch(
-      "https://poll-in.herokuapp.com/deletepoll?userid=" +
-        this.props.authUserId +
-        "&id=" +
-        pollid
-    );
+    const responseDelete = await RequestApi("deletePoll", [
+      this.props.authUserId,
+      pollid
+    ]);
     if (responseDelete.ok) {
       alert("Deleted!");
       this.setState({
@@ -81,24 +71,35 @@ export default class Posts extends React.Component {
       <View style={styles.container}>
         {this.state.loading && (
           <View style={styles.loader}>
-            <ActivityIndicator color="lime" size="large" />
+            <ActivityIndicator color={Colors.loadingTxt} size="small" />
             <Text style={styles.heading}>Loading...</Text>
           </View>
         )}
         <ActionButton
-          buttonColor="green"
+          buttonColor={Colors.greenBtn}
           style={{ zIndex: 10 }}
           renderIcon={active => {
             if (active)
-              return <Icon.Ionicons name="md-add" size={35} color="white" />;
+              return (
+                <Icon.Ionicons
+                  name="md-add"
+                  size={30}
+                  color={Colors.iconColor}
+                />
+              );
             else
-              return <Icon.Ionicons name="md-menu" size={35} color="white" />;
+              return (
+                <Icon.Ionicons
+                  name="md-menu"
+                  size={30}
+                  color={Colors.iconColor}
+                />
+              );
           }}
-          size={70}
         >
           {this.props.loggedIn && (
             <ActionButton.Item
-              buttonColor="green"
+              buttonColor={Colors.greenBtn}
               title="New Poll"
               onPress={() =>
                 this.props.navigation.navigate("NewPoll", {
@@ -106,15 +107,23 @@ export default class Posts extends React.Component {
                 })
               }
             >
-              <Icon.Ionicons name="md-create" color="white" size={25} />
+              <Icon.Ionicons
+                name="md-create"
+                color={Colors.iconColor}
+                size={20}
+              />
             </ActionButton.Item>
           )}
           <ActionButton.Item
-            buttonColor="blue"
+            buttonColor={Colors.blueBtn}
             title="Refresh"
             onPress={async () => await this.refresh()}
           >
-            <Icon.Ionicons name="md-refresh" color="white" size={25} />
+            <Icon.Ionicons
+              name="md-refresh"
+              color={Colors.iconColor}
+              size={20}
+            />
           </ActionButton.Item>
         </ActionButton>
         <ScrollView>
@@ -141,18 +150,18 @@ export default class Posts extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#112"
+    backgroundColor: Colors.darkbg
   },
   heading: {
-    fontSize: 30,
-    color: "lime",
-    marginLeft: 15
+    fontSize: 17,
+    color: Colors.loadingTxt,
+    marginLeft: 5
   },
   loader: {
     flex: 0,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    margin: 10
+    margin: 4
   }
 });

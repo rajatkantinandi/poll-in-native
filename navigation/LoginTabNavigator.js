@@ -5,6 +5,7 @@ import {
   createSwitchNavigator,
   createStackNavigator
 } from "react-navigation";
+import { Colors } from "../constants/Colors";
 
 import TabBarIcon from "../components/TabBarIcon";
 import SignInScreen from "../screens/SignInScreen";
@@ -51,14 +52,14 @@ const DemoNav = createStackNavigator(
     initialRouteName: "DemoScreen",
     navigationOptions: {
       headerStyle: {
-        backgroundColor: "indigo",
-        height: 50,
-        padding: 15
+        backgroundColor: Colors.demoTabbg,
+        height: 35,
+        padding: 5
       },
-      headerTintColor: "#ddf",
+      headerTintColor: Colors.demoTabTint,
       headerTitleStyle: {
         fontWeight: "bold",
-        fontSize: 25,
+        fontSize: 18,
         fontFamily: "monospace"
       }
     }

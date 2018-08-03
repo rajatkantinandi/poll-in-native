@@ -1,6 +1,8 @@
 import React from "react";
 import TitleBar from "../components/TitleBar";
 import { View, Text, StyleSheet } from "react-native";
+import { Colors } from "../constants/Colors";
+
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     headerTitle: <TitleBar />
@@ -10,10 +12,10 @@ export default class SettingsScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>About</Text>
-        <Text style={styles.p}>Version 1.1.0</Text>
-        <Text style={styles.p}>Created on 30.07.18</Text>
+        <Text style={styles.p}>Version 1.2.0</Text>
+        <Text style={styles.p}>Created on 04.08.18</Text>
         <Text style={styles.p}>
-          - Rajat Kanti Nandi (https://twitter.com/@rajatkantinandi)
+          - Rajat Kanti Nandi (https://twitter.com/rajatkantinandi)
         </Text>
       </View>
     );
@@ -23,20 +25,20 @@ export default class SettingsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#777"
+    backgroundColor: Colors.signInbg
   },
   p: {
-    fontSize: 20,
+    fontSize: 15,
     color: "white",
-    margin: 5,
-    padding: 5
+    margin: 3,
+    padding: 2
   },
   heading: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "bold",
     color: "white",
     textAlign: "center",
-    margin: 10,
-    padding: 5
+    margin: 5,
+    padding: 2
   }
 });

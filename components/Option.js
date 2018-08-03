@@ -1,12 +1,18 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import { Colors } from "../constants/Colors";
+
 export default class Option extends React.Component {
   handlePress = () => {
     this.props.handlePress(this.props.idx);
   };
   render() {
-    const bgColor = this.props.checked ? "#afa" : "#889";
-    const txtColor = this.props.checked ? "#333" : "#eee";
+    const bgColor = this.props.checked
+      ? Colors.optionbgChecked
+      : Colors.optionbg;
+    const txtColor = this.props.checked
+      ? Colors.optiontxtChecked
+      : Colors.optiontxt;
     return (
       <TouchableOpacity
         style={[styles.container, { backgroundColor: bgColor }]}
@@ -25,16 +31,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 0,
     flexDirection: "row",
-    padding: 8,
-    backgroundColor: "#557",
-    margin: 5,
-    borderRadius: 10,
-    paddingLeft: 10
+    padding: 6,
+    backgroundColor: Colors.optionbg,
+    margin: 4,
+    borderRadius: 8,
+    paddingLeft: 5
   },
   text: {
-    marginLeft: 5,
-    fontSize: 16,
-    color: "#eee",
+    marginLeft: 3,
+    color: Colors.optiontxt,
     fontWeight: "bold"
   }
 });

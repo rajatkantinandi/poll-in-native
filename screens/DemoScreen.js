@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Button } from "react-native";
 import Posts from "../components/Posts";
+import RequestApi from "../constants/RequestApi";
+import { Colors } from "../constants/Colors";
 
 export default class DemoScreen extends React.Component {
   state = {
@@ -22,12 +24,7 @@ export default class DemoScreen extends React.Component {
     };
   };
   fetchPosts = async () => {
-    const response = await fetch(
-      "https://poll-in.herokuapp.com/trending-polls",
-      {
-        method: "GET"
-      }
-    );
+    const response = await RequestApi("trendingPolls");
     if (response.ok) {
       const result = await response.json();
       return result;
@@ -52,6 +49,6 @@ export default class DemoScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: Colors.lightbg
   }
 });

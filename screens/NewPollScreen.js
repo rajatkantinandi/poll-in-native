@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import { Icon } from "expo";
 import StyledBtn from "../components/StyledBtn";
 import StyledInput from "../components/StyledInput";
+import { Colors } from "../constants/Colors";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -32,9 +33,9 @@ export default class HomeScreen extends React.Component {
       <ScrollView>
         <View style={styles.container}>
           <StyledInput
-            bgColor="#777"
+            bgColor={Colors.newInput}
             placeholder="Question?"
-            color="white"
+            color={Colors.primaryText}
             onChangeText={question => this.setState({ question })}
             icon={
               <Icon.FontAwesome
@@ -46,9 +47,9 @@ export default class HomeScreen extends React.Component {
           />
           {this.state.options.map((option, index) => (
             <StyledInput
-              bgColor="#777"
+              bgColor={Colors.newInput}
               key={index}
-              color="white"
+              color={Colors.primaryText}
               placeholder={`Option ${index + 1}`}
               onChangeText={option =>
                 this.setState({
@@ -63,16 +64,16 @@ export default class HomeScreen extends React.Component {
           ))}
           <View style={styles.buttonsContainer}>
             <StyledBtn
-              bgcolor="#292"
-              txtColor="#ccc"
+              bgcolor={Colors.greenBtn}
+              txtColor={Colors.btnText}
               title="Add Option"
               onPress={() => {
                 this.setState({ options: [...this.state.options, ""] });
               }}
             />
             <StyledBtn
-              bgcolor="#229"
-              txtColor="#ccc"
+              bgcolor={Colors.blueBtn}
+              txtColor={Colors.btnText}
               activity={this.state.activity}
               title={this.state.activity ? "Please wait..." : "Post"}
               onPress={this.addNewPoll}
@@ -88,10 +89,10 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.lightbg,
     alignItems: "center",
-    margin: 20,
-    padding: 10
+    margin: 10,
+    padding: 5
   },
   buttonsContainer: {
     flex: 0,

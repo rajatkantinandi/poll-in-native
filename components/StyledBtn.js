@@ -5,13 +5,17 @@ import {
   Text,
   ActivityIndicator
 } from "react-native";
+import { Colors } from "../constants/Colors";
 
 export default class StyledBtn extends React.Component {
   render() {
     return (
       <TouchableOpacity
         onPress={this.props.onPress}
-        style={[styles.btn, { backgroundColor: this.props.bgcolor,width:this.props.width }]}
+        style={[
+          styles.btn,
+          { backgroundColor: this.props.bgcolor, width: this.props.width }
+        ]}
       >
         {this.props.activity && (
           <ActivityIndicator color={this.props.txtColor} size="small" />
@@ -26,19 +30,19 @@ export default class StyledBtn extends React.Component {
 }
 const styles = StyleSheet.create({
   btn: {
-    marginLeft: 15,
-    backgroundColor: "lime",
-    padding: 8,
+    marginLeft: 6,
+    backgroundColor: Colors.greenBtn,
+    padding: 6,
     flex: 0,
     justifyContent: "center",
     flexDirection: "row",
-    borderRadius: 8,
-    borderColor: "grey",
+    borderRadius: 6,
+    borderColor: Colors.fancyBorder,
     borderWidth: 1
   },
   txt: {
-    fontSize: 18,
-    paddingLeft: 5,
-    fontWeight:"bold"
+    paddingLeft: 4,
+    fontWeight: "bold",
+    fontSize: 17
   }
 });

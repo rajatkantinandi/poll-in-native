@@ -3,11 +3,17 @@ import { StyleSheet, Text, View } from "react-native";
 import OptionsMenu from "react-native-options-menu";
 import { Icon } from "expo";
 const MoreIcon = require("../assets/images/more.png");
+import { Colors } from "../constants/Colors";
+
 export default class PollTitle extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Icon.FontAwesome name="user-circle" size={30} color="indigo" />
+        <Icon.FontAwesome
+          name="user-circle"
+          size={30}
+          color={Colors.usericon}
+        />
         <Text style={styles.txt}>
           {this.props.createdBy} @ {this.props.at}
         </Text>
@@ -36,11 +42,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     flexWrap: "wrap",
-    padding: 5,
-    borderBottomWidth: 2
+    padding: 2,
+    borderBottomWidth: 2,
+    borderColor: Colors.fancyBorder
   },
   txt: {
-    fontSize: 18,
-    paddingLeft: 5
+    paddingLeft: 3
   }
 });

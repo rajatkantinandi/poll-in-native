@@ -4,6 +4,9 @@ import { Icon } from "expo";
 import TitleBar from "../components/TitleBar";
 import StyledBtn from "../components/StyledBtn";
 import StyledInput from "../components/StyledInput";
+import RequestApi from "../constants/RequestApi";
+import { Colors } from "../constants/Colors";
+
 export default class SignUpScreen extends React.Component {
   static navigationOptions = {
     header: "Sign Up"
@@ -32,20 +35,10 @@ export default class SignUpScreen extends React.Component {
     } else {
       this.setState({ activity: true });
       const data = {
-        method: "POST",
-        body: JSON.stringify({
-          username: username,
-          password: password
-        }),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
+        username: username,
+        password: password
       };
-      const response = await fetch(
-        "https://poll-in.herokuapp.com/signup",
-        data
-      );
+      const response = await RequestApi("signup", data);
       if (response.ok) {
         alert("Successfully Signed up, Now login to continue");
         this.props.navigation.navigate("SignInScreen");
@@ -61,9 +54,7 @@ export default class SignUpScreen extends React.Component {
     if (username.length < 5) {
       this.setState({ validUserName: false });
     } else {
-      const response = await fetch(
-        "https://poll-in.herokuapp.com/checkavailuser/" + username
-      );
+      const response = await RequestApi("validateUser", username);
       if (response.ok) this.setState({ validUserName: true });
       else this.setState({ validUserName: false });
     }
@@ -73,15 +64,19 @@ export default class SignUpScreen extends React.Component {
       <View style={styles.container}>
         <TitleBar />
         <StyledInput
-          bgColor="#335"
+          bgColor={Colors.navyInput}
           placeholder="Choose an Username"
-          color="white"
+          color={Colors.primaryText}
           autoCapitalize="none"
           onChangeText={async username => {
             await this.validateUser(username);
           }}
           icon={
-            <Icon.FontAwesome name="user-circle" size={30} color={"white"} />
+            <Icon.FontAwesome
+              name="user-circle"
+              size={25}
+              color={Colors.primaryText}
+            />
           }
         />
         {this.state.validUserName ? (
@@ -92,37 +87,52 @@ export default class SignUpScreen extends React.Component {
           </Text>
         ) : (
           <Text
-            style={[styles.hint, { color: "red", backgroundColor: "white" }]}
+            style={[
+              styles.hint,
+              { color: Colors.impTxt, backgroundColor: Colors.lightbg }
+            ]}
           >
             x Username Unvailable
           </Text>
         )}
         <StyledInput
-          bgColor="#335"
+          bgColor={Colors.navyInput}
           placeholder="Choose a Password"
-          color="white"
+          color={Colors.primaryText}
           onChangeText={password => this.setState({ password })}
-          icon={<Icon.MaterialIcons name="lock" size={30} color={"white"} />}
+          icon={
+            <Icon.MaterialIcons
+              name="lock"
+              size={25}
+              color={Colors.primaryText}
+            />
+          }
           secureTextEntry={true}
         />
         <Text style={styles.hint}>
           ** Password must be atleast 8 chars long & have only letters & numbers
         </Text>
         <StyledInput
-          bgColor="#335"
+          bgColor={Colors.navyInput}
           placeholder="Repeat Password"
-          color="white"
+          color={Colors.primaryText}
           onChangeText={repeatPassword => this.setState({ repeatPassword })}
-          icon={<Icon.MaterialIcons name="lock" size={30} color={"white"} />}
+          icon={
+            <Icon.MaterialIcons
+              name="lock"
+              size={25}
+              color={Colors.primaryText}
+            />
+          }
           secureTextEntry={true}
         />
         <StyledBtn
-          bgcolor="green"
-          txtColor="#ccc"
+          bgcolor={Colors.greenBtn}
+          txtColor={Colors.btnText}
           activity={this.state.activity}
           title={this.state.activity ? "Please wait..." : "Sign Up"}
           onPress={this.signupAction}
-          width={220}
+          width={180}
         />
       </View>
     );
@@ -131,15 +141,15 @@ export default class SignUpScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#777",
+    backgroundColor: Colors.signInbg,
     alignItems: "center"
   },
   hint: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "bold",
     color: "white",
     textAlign: "center",
-    margin: 5,
-    padding: 5
+    margin: 2,
+    padding: 2
   }
 });
