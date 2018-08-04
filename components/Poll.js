@@ -7,7 +7,7 @@ import PollTitle from "./PollTitle";
 import Prompt from "rn-prompt";
 import RequestApi from "../constants/RequestApi";
 import { Colors } from "../constants/Colors";
-
+import PropTypes from "prop-types";
 export default class Poll extends React.Component {
   state = {
     promptVisible: false,
@@ -194,7 +194,18 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
     );
   }
 }
-
+Poll.propTypes = {
+  poll: PropTypes.object.isRequired,
+  authUser: PropTypes.string,
+  authUserId: PropTypes.string,
+  deletePoll: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired
+};
+Poll.defaultProps = {
+  poll: {},
+  loggedIn: false,
+  deletePoll: () => alert("Error: Not allowed to delete")
+};
 const styles = StyleSheet.create({
   container: {
     margin: 4,

@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
 import { Colors } from "../constants/Colors";
-
+import PropTypes from "prop-types";
 export default class Option extends React.Component {
   handlePress = () => {
     this.props.handlePress(this.props.idx);
@@ -26,7 +26,16 @@ export default class Option extends React.Component {
     );
   }
 }
-
+Option.propTypes = {
+  checked: PropTypes.bool,
+  value: PropTypes.string.isRequired,
+  handlePress: PropTypes.func.isRequired
+};
+Option.defaultProps = {
+  value: "Undefined",
+  handlePress: () =>
+    alert("Error: no pressHandler provided to the options obj!")
+};
 const styles = StyleSheet.create({
   container: {
     flex: 0,

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { Colors } from "../constants/Colors";
+import PropTypes from "prop-types";
 
 export default class StyledInput extends React.Component {
   render() {
@@ -12,12 +13,25 @@ export default class StyledInput extends React.Component {
           placeholder={this.props.placeholder}
           onChangeText={this.props.onChangeText}
           secureTextEntry={this.props.secureTextEntry}
-          autoCapitalize={this.props.autoCapitalize || "sentences"}
+          autoCapitalize={this.props.autoCapitalize}
         />
       </View>
     );
   }
 }
+StyledInput.propTypes = {
+  bgColor: PropTypes.string,
+  color: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
+  onChangeText: PropTypes.func.isRequired,
+  secureTextEntry: PropTypes.bool,
+  autoCapitalize: PropTypes.string.isRequired
+};
+StyledInput.defaultProps = {
+  placeholder: "Type Something...",
+  onChangeText: null,
+  autoCapitalize: "sentences"
+};
 const styles = StyleSheet.create({
   field: {
     flex: 0,

@@ -6,6 +6,7 @@ import {
   ActivityIndicator
 } from "react-native";
 import { Colors } from "../constants/Colors";
+import PropTypes from "prop-types";
 
 export default class StyledBtn extends React.Component {
   render() {
@@ -28,6 +29,17 @@ export default class StyledBtn extends React.Component {
     );
   }
 }
+StyledBtn.propTypes = {
+  bgcolor: PropTypes.string,
+  txtColor: PropTypes.string,
+  activity: PropTypes.bool,
+  title: PropTypes.string.isRequired,
+  onPress: PropTypes.func
+};
+StyledBtn.defaultProps = {
+  title: "Invalid button",
+  onPress: null
+};
 const styles = StyleSheet.create({
   btn: {
     marginLeft: 6,

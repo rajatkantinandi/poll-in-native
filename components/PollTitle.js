@@ -4,6 +4,7 @@ import OptionsMenu from "react-native-options-menu";
 import { Icon } from "expo";
 const MoreIcon = require("../assets/images/more.png");
 import { Colors } from "../constants/Colors";
+import PropTypes from "prop-types";
 
 export default class PollTitle extends React.Component {
   render() {
@@ -35,7 +36,14 @@ export default class PollTitle extends React.Component {
     );
   }
 }
-
+PollTitle.propTypes = {
+  createdBy: PropTypes.string.isRequired,
+  at: PropTypes.string.isRequired
+};
+PollTitle.defaultProps = {
+  createdBy: "Invalid user",
+  at: "Undefined date"
+};
 const styles = StyleSheet.create({
   container: {
     flex: 0,

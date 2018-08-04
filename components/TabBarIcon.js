@@ -1,6 +1,7 @@
 import React from "react";
 import { Icon } from "expo";
 import { Colors } from "../constants/Colors";
+import PropTypes from "prop-types";
 
 export default class TabBarIcon extends React.Component {
   render() {
@@ -14,3 +15,11 @@ export default class TabBarIcon extends React.Component {
     );
   }
 }
+TabBarIcon.propTypes = {
+  name: PropTypes.string.isRequired,
+  focused: PropTypes.bool.isRequired
+};
+TabBarIcon.defaultProps = {
+  name: "md-alert",
+  focused: false
+};
