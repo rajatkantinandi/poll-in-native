@@ -19,7 +19,7 @@ export default class SignUpScreen extends React.Component {
     validUserName: false
   };
   signupAction = async () => {
-    const { username, password, repeatPassword } = this.state;
+    const { username, password, repeatPassword, validUserName } = this.state;
     if (!username) alert("Username must not be empty");
     else if (username.length < 5)
       alert("username must be atleast 5 characters long");
