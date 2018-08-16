@@ -8,10 +8,11 @@ import {
 } from "react-native";
 import { AppLoading, Asset, Font, Icon, Constants } from "expo";
 import { createSwitchNavigator } from "react-navigation";
-// import AppNavigator from "./navigation/AppNavigator";
 import MainTabNavigator from "./navigation/MainTabNavigator";
-import { Colors } from "./constants/Colors";
 import LoginTabNavigator from "./navigation/LoginTabNavigator";
+import { ColorMode } from "./constants/Colors";
+const Colors = ColorMode.getColor();
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -31,7 +32,7 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <this.state.appNavigator />
+          <this.state.appNavigator screenProps={{ theme: "light" }} />
         </View>
       );
     }
@@ -59,9 +60,13 @@ export default class App extends React.Component {
   _handleFinishLoading = async () => {
     const username = await AsyncStorage.getItem("authUser");
     const userId = await AsyncStorage.getItem("authUserId");
+    const theme = await AsyncStorage.getItem("theme");
     let alpha = "Login";
     if (username && userId) {
       alpha = "Main";
+    }
+    if (theme) {
+      ColorMode.setColor(theme);
     }
     this.setState({
       isLoadingComplete: true,

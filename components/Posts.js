@@ -11,8 +11,7 @@ import Poll from "./Poll";
 import ActionButton from "react-native-action-button";
 import { Icon } from "expo";
 import RequestApi from "../constants/RequestApi";
-import { Colors } from "../constants/Colors";
-
+import { ColorMode } from "../constants/Colors";
 export default class Posts extends React.Component {
   state = {
     posts: [],
@@ -37,6 +36,7 @@ export default class Posts extends React.Component {
   };
   addNewPoll = async (question, numOfOptions, optionsObj) => {
     const data = {
+      userid: this.props.authUserId,
       question: question,
       numOfOptions: numOfOptions,
       ...optionsObj
@@ -67,6 +67,25 @@ export default class Posts extends React.Component {
     }
   };
   render() {
+    const Colors = ColorMode.getColor();
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: Colors.darkbg
+      },
+      heading: {
+        fontSize: 17,
+        color: Colors.loadingTxt,
+        marginLeft: 5
+      },
+      loader: {
+        flex: 0,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 4
+      }
+    });
     return (
       <View style={styles.container}>
         {this.state.loading && (
@@ -84,7 +103,7 @@ export default class Posts extends React.Component {
                 <Icon.Ionicons
                   name="md-add"
                   size={30}
-                  color={Colors.iconColor}
+                  color={Colors.iconColor2}
                 />
               );
             else
@@ -92,7 +111,7 @@ export default class Posts extends React.Component {
                 <Icon.Ionicons
                   name="md-menu"
                   size={30}
-                  color={Colors.iconColor}
+                  color={Colors.iconColor2}
                 />
               );
           }}
@@ -109,7 +128,7 @@ export default class Posts extends React.Component {
             >
               <Icon.Ionicons
                 name="md-create"
-                color={Colors.iconColor}
+                color={Colors.iconColor2}
                 size={20}
               />
             </ActionButton.Item>
@@ -121,7 +140,7 @@ export default class Posts extends React.Component {
           >
             <Icon.Ionicons
               name="md-refresh"
-              color={Colors.iconColor}
+              color={Colors.iconColor2}
               size={20}
             />
           </ActionButton.Item>
@@ -146,22 +165,3 @@ export default class Posts extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.darkbg
-  },
-  heading: {
-    fontSize: 17,
-    color: Colors.loadingTxt,
-    marginLeft: 5
-  },
-  loader: {
-    flex: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 4
-  }
-});

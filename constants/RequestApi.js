@@ -20,9 +20,9 @@ const links = {
   },
   trendingPolls: "/trending-polls",
   newPoll: {
-    url: "/create-poll",
+    url: "/new-poll",
     method: "POST",
-    params: ["question", "numOfOptions", "...optionsObj"]
+    params: ["userid", "question", "numOfOptions", "...optionsObj"]
   },
   deletePoll: {
     url: "/deletepoll",
@@ -35,9 +35,13 @@ const links = {
     params: ["id", "poll"]
   },
   addOption: {
-    url: "/update-poll",
+    url: "/add-option",
     method: "GET",
     params: ["id", "option"]
+  },
+  profile: {
+    url: "/profile/",
+    params: "username"
   }
 };
 

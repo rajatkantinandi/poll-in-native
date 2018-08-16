@@ -1,10 +1,10 @@
 import React from "react";
 import { Icon } from "expo";
-import { Colors } from "../constants/Colors";
 import PropTypes from "prop-types";
-
+import { ColorMode } from "../constants/Colors";
 export default class TabBarIcon extends React.Component {
   render() {
+    const Colors = ColorMode.getColor();
     return (
       <Icon.Ionicons
         name={this.props.name}

@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Button } from "react-native";
 import Posts from "../components/Posts";
 import RequestApi from "../constants/RequestApi";
-import { Colors } from "../constants/Colors";
+import { ColorMode } from "../constants/Colors";
 
 export default class DemoScreen extends React.Component {
   state = {
@@ -34,6 +34,14 @@ export default class DemoScreen extends React.Component {
     }
   };
   render() {
+    const Colors = ColorMode.getColor();
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: Colors.lightbg
+      }
+    });
+
     return (
       <View style={styles.container}>
         <Posts
@@ -45,10 +53,3 @@ export default class DemoScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.lightbg
-  }
-});

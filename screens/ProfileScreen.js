@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, Button, View, AsyncStorage } from "react-native";
+import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 import Posts from "../components/Posts";
 import RequestApi from "../constants/RequestApi";
 import { ColorMode } from "../constants/Colors";
@@ -7,16 +7,7 @@ import { ColorMode } from "../constants/Colors";
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam("authUser") || "Profile",
-      headerRight: (
-        <Button
-          onPress={async () => {
-            await navigation.getParam("logout")();
-          }}
-          title="Log Out"
-          color="red"
-        />
-      )
+      title: navigation.getParam("username") || "Profile"
     };
   };
   state = {
@@ -32,7 +23,10 @@ export default class HomeScreen extends React.Component {
   };
   fetchPosts = async () => {
     await this.fetchAuthUser();
-    const response = await RequestApi("userpage", this.state.authUserId);
+    const response = await RequestApi(
+      "profile",
+      this.props.navigation.getParam("username")
+    );
     if (response.ok) {
       const result = await response.json();
       return result.polls.reverse();
@@ -55,10 +49,6 @@ export default class HomeScreen extends React.Component {
   };
   componentDidMount = async () => {
     await this.fetchAuthUser();
-    this.props.navigation.setParams({
-      authUser: this.state.authUser,
-      logout: this.logout
-    });
   };
   render() {
     const Colors = ColorMode.getColor();
@@ -82,9 +72,7 @@ export default class HomeScreen extends React.Component {
         <Posts
           navigation={this.props.navigation}
           fetchPosts={this.fetchPosts}
-          authUser={this.state.authUser}
-          authUserId={this.state.authUserId}
-          loggedIn={true}
+          loggedIn={false}
         />
       </View>
     );

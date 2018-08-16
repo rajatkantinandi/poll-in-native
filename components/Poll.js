@@ -6,8 +6,8 @@ import StyledBtn from "./StyledBtn";
 import PollTitle from "./PollTitle";
 import Prompt from "rn-prompt";
 import RequestApi from "../constants/RequestApi";
-import { Colors } from "../constants/Colors";
 import PropTypes from "prop-types";
+import { ColorMode } from "../constants/Colors";
 export default class Poll extends React.Component {
   state = {
     promptVisible: false,
@@ -72,6 +72,22 @@ export default class Poll extends React.Component {
     this.setState({ ...nextProps.poll });
   };
   render() {
+    const Colors = ColorMode.getColor();
+    const styles = StyleSheet.create({
+      container: {
+        margin: 4,
+        backgroundColor: Colors.lightbg,
+        padding: 2,
+        borderRadius: 3,
+        borderColor: Colors.fancyBorder,
+        borderWidth: 1
+      },
+      txt: {
+        fontSize: 16,
+        paddingBottom: 4,
+        color: Colors.primaryText
+      }
+    });
     const { createdBy, totalvotes, question, options, at } = this.state;
     const moreOptions = ["Add Option"];
     const moreActions = [() => this.setState({ promptVisible: true })];
@@ -89,12 +105,13 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
         <PollTitle
           createdBy={createdBy}
           at={at}
+          navigation={this.props.navigation}
           options={
             this.props.loggedIn && { labels: moreOptions, actions: moreActions }
           }
         />
         <View>
-          <Text style={{ fontSize: 16, paddingBottom: 4 }}>{question}</Text>
+          <Text style={styles.txt}>{question}</Text>
         </View>
         <View>
           {options.map((option, index) => (
@@ -118,10 +135,10 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
           {this.state.voting == "not done" ? (
             <StyledBtn
               bgcolor={Colors.voteBtnbg}
-              txtColor={Colors.primaryText}
+              txtColor={Colors.btnText}
               icon={
                 <Icon.Foundation
-                  color={Colors.iconColor}
+                  color={Colors.iconColor2}
                   size={25}
                   name="like"
                 />
@@ -132,7 +149,7 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
           ) : this.state.voting == "progress" ? (
             <StyledBtn
               bgcolor={Colors.voteBtnbg}
-              txtColor={Colors.primaryText}
+              txtColor={Colors.btnText}
               activity={true}
               title={`Voting...`}
               onPress={null}
@@ -140,18 +157,18 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
           ) : (
             <StyledBtn
               bgcolor={Colors.donebg}
-              txtColor={Colors.primaryText}
+              txtColor={Colors.btnText}
               title={`✅ Done  (${totalvotes})`}
               onPress={null}
             />
           )}
           <StyledBtn
             bgcolor={Colors.resultBtnbg}
-            txtColor={Colors.primaryText}
+            txtColor={Colors.btnText}
             title={`Result`}
             icon={
               <Icon.Ionicons
-                color={Colors.iconColor}
+                color={Colors.iconColor2}
                 size={25}
                 name="ios-pie"
               />
@@ -162,11 +179,11 @@ https://poll-in.herokuapp.com/poll/${this.state["_id"]}
           />
           <StyledBtn
             bgcolor={Colors.shareBtnbg}
-            txtColor={Colors.primaryText}
+            txtColor={Colors.btnText}
             title={`Share`}
             icon={
               <Icon.Ionicons
-                color={Colors.iconColor}
+                color={Colors.iconColor2}
                 size={25}
                 name="ios-share-alt"
               />
@@ -206,16 +223,3 @@ Poll.defaultProps = {
   loggedIn: false,
   deletePoll: () => alert("Error: Not allowed to delete")
 };
-const styles = StyleSheet.create({
-  container: {
-    margin: 4,
-    backgroundColor: Colors.lightbg,
-    padding: 2,
-    borderRadius: 3,
-    borderColor: Colors.fancyBorder,
-    borderWidth: 1
-  },
-  txt: {
-    paddingLeft: 2
-  }
-});

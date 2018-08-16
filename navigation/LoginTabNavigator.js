@@ -5,13 +5,15 @@ import {
   createSwitchNavigator,
   createStackNavigator
 } from "react-navigation";
-import { Colors } from "../constants/Colors";
+import { ColorMode } from "../constants/Colors";
+const Colors = ColorMode.getColor();
 
 import TabBarIcon from "../components/TabBarIcon";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import ResultScreen from "../screens/ResultScreen";
 import DemoScreen from "../screens/DemoScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 SignInScreen.navigationOptions = {
   tabBarLabel: "Sign In",
@@ -46,7 +48,8 @@ const AccessNav = createBottomTabNavigator({
 const DemoNav = createStackNavigator(
   {
     DemoScreen,
-    Result: ResultScreen
+    Result: ResultScreen,
+    Profile: ProfileScreen
   },
   {
     initialRouteName: "DemoScreen",

@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Image } from "react-native";
-import { Colors } from "../constants/Colors";
+import { ColorMode } from "../constants/Colors";
 
 export default () => {
+  const Colors = ColorMode.getColor();
   return (
     <View
       style={{

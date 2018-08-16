@@ -1,13 +1,34 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 import OptionsMenu from "react-native-options-menu";
 import { Icon } from "expo";
 const MoreIcon = require("../assets/images/more.png");
-import { Colors } from "../constants/Colors";
 import PropTypes from "prop-types";
-
+import { ColorMode } from "../constants/Colors";
 export default class PollTitle extends React.Component {
   render() {
+    const Colors = ColorMode.getColor();
+    const styles = StyleSheet.create({
+      container: {
+        flex: 0,
+        flexDirection: "row",
+        alignItems: "center",
+        flexWrap: "wrap",
+        padding: 2,
+        borderBottomWidth: 2,
+        borderColor: Colors.fancyBorder
+      },
+      txt: {
+        paddingLeft: 3,
+        color: Colors.primaryText
+      },
+      hyperlnk: {
+        paddingLeft: 3,
+        fontSize: 16,
+        fontWeight: "bold",
+        color: Colors.primaryText
+      }
+    });
     return (
       <View style={styles.container}>
         <Icon.FontAwesome
@@ -15,9 +36,16 @@ export default class PollTitle extends React.Component {
           size={30}
           color={Colors.usericon}
         />
-        <Text style={styles.txt}>
-          {this.props.createdBy} @ {this.props.at}
-        </Text>
+        <TouchableHighlight
+          onPress={() =>
+            this.props.navigation.navigate("Profile", {
+              username: this.props.createdBy
+            })
+          }
+        >
+          <Text style={styles.hyperlnk}>{this.props.createdBy}</Text>
+        </TouchableHighlight>
+        <Text style={styles.txt}>@ {this.props.at}</Text>
         {this.props.options && (
           <OptionsMenu
             button={MoreIcon}
@@ -25,7 +53,8 @@ export default class PollTitle extends React.Component {
               width: 32,
               height: 8,
               margin: 7.5,
-              resizeMode: "contain"
+              resizeMode: "contain",
+              backgroundColor: "#ccc"
             }}
             destructiveIndex={1}
             options={this.props.options.labels}
@@ -44,17 +73,3 @@ PollTitle.defaultProps = {
   createdBy: "Invalid user",
   at: "Undefined date"
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 0,
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "wrap",
-    padding: 2,
-    borderBottomWidth: 2,
-    borderColor: Colors.fancyBorder
-  },
-  txt: {
-    paddingLeft: 3
-  }
-});

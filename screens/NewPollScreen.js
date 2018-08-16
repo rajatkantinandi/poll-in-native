@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import { Icon } from "expo";
 import StyledBtn from "../components/StyledBtn";
 import StyledInput from "../components/StyledInput";
-import { Colors } from "../constants/Colors";
+import { ColorMode } from "../constants/Colors";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -29,8 +29,28 @@ export default class HomeScreen extends React.Component {
     activity: false
   };
   render() {
+    const Colors = ColorMode.getColor();
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: Colors.lightbg,
+        alignItems: "center",
+        margin: 10,
+        padding: 5
+      },
+      buttonsContainer: {
+        flex: 0,
+        flexDirection: "row",
+        alignItems: "center"
+      }
+    });
+
     return (
-      <ScrollView>
+      <ScrollView
+        style={{
+          backgroundColor: Colors.lightbg
+        }}
+      >
         <View style={styles.container}>
           <StyledInput
             bgColor={Colors.newInput}
@@ -41,7 +61,7 @@ export default class HomeScreen extends React.Component {
               <Icon.FontAwesome
                 name="question-circle"
                 size={30}
-                color={"white"}
+                color={Colors.iconColor}
               />
             }
           />
@@ -59,7 +79,13 @@ export default class HomeScreen extends React.Component {
                   })
                 })
               }
-              icon={<Icon.Entypo name="newsletter" size={30} color={"white"} />}
+              icon={
+                <Icon.Entypo
+                  name="newsletter"
+                  size={30}
+                  color={Colors.iconColor}
+                />
+              }
             />
           ))}
           <View style={styles.buttonsContainer}>
@@ -85,18 +111,3 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.lightbg,
-    alignItems: "center",
-    margin: 10,
-    padding: 5
-  },
-  buttonsContainer: {
-    flex: 0,
-    flexDirection: "row",
-    alignItems: "center"
-  }
-});

@@ -5,7 +5,7 @@ import TitleBar from "../components/TitleBar";
 import StyledBtn from "../components/StyledBtn";
 import StyledInput from "../components/StyledInput";
 import RequestApi from "../constants/RequestApi";
-import { Colors } from "../constants/Colors";
+import { ColorMode } from "../constants/Colors";
 
 export default class SignUpScreen extends React.Component {
   static navigationOptions = {
@@ -60,6 +60,22 @@ export default class SignUpScreen extends React.Component {
     }
   };
   render() {
+    const Colors = ColorMode.getColor();
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: Colors.signInbg,
+        alignItems: "center"
+      },
+      hint: {
+        fontSize: 15,
+        fontWeight: "bold",
+        color: Colors.primaryText,
+        textAlign: "center",
+        margin: 2,
+        padding: 2
+      }
+    });
     return (
       <View style={styles.container}>
         <TitleBar />
@@ -138,18 +154,3 @@ export default class SignUpScreen extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.signInbg,
-    alignItems: "center"
-  },
-  hint: {
-    fontSize: 15,
-    fontWeight: "bold",
-    color: "white",
-    textAlign: "center",
-    margin: 2,
-    padding: 2
-  }
-});

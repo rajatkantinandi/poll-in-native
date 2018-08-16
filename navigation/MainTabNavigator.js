@@ -4,7 +4,8 @@ import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
-import { Colors } from "../constants/Colors";
+import { ColorMode } from "../constants/Colors";
+const Colors = ColorMode.getColor();
 
 import TabBarIcon from "../components/TabBarIcon";
 import PostsScreen from "../screens/PostsScreen";
@@ -12,12 +13,14 @@ import UserScreen from "../screens/UserScreen";
 import AboutScreen from "../screens/AboutScreen";
 import ResultScreen from "../screens/ResultScreen";
 import NewPollScreen from "../screens/NewPollScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const PostsStack = createStackNavigator(
   {
     Posts: PostsScreen,
     Result: ResultScreen,
-    NewPoll: NewPollScreen
+    NewPoll: NewPollScreen,
+    Profile: ProfileScreen
   },
   {
     initialRouteName: "Posts",
@@ -55,7 +58,8 @@ const UserStack = createStackNavigator(
   {
     Me: UserScreen,
     Result: ResultScreen,
-    NewPoll: NewPollScreen
+    NewPoll: NewPollScreen,
+    Profile: ProfileScreen
   },
   {
     initialRouteName: "Me",

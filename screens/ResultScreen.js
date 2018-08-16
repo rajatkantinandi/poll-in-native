@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { VictoryPie, VictoryTheme, VictoryLegend } from "victory-native";
-import { Colors } from "../constants/Colors";
+import { ColorMode } from "../constants/Colors";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -9,6 +9,22 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
+    const Colors = ColorMode.getColor();
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: Colors.lightbg
+      },
+      heading: {
+        padding: 5,
+        fontSize: 18,
+        color: Colors.impTxt
+      },
+      heading2: {
+        paddingLeft: 8,
+        color: Colors.secondaryTxt
+      }
+    });
     const totalvotes = this.props.navigation.getParam("totalvotes");
     const data = this.props.navigation.getParam("options").map(elem => {
       const x = elem.value;
@@ -36,7 +52,11 @@ export default class HomeScreen extends React.Component {
             radius={120}
             theme={VictoryTheme.material}
             style={{
-              labels: { fill: Colors.lightbg, fontWeight: "bold", fontSize: 13 }
+              labels: {
+                fill: "#fff",
+                fontWeight: "bold",
+                fontSize: 13
+              }
             }}
             labelRadius={80}
             labels={d => d.y + "%"}
@@ -50,6 +70,13 @@ export default class HomeScreen extends React.Component {
             data={data.map(elem => ({
               name: elem.x
             }))}
+            style={{
+              labels: {
+                fill: Colors.primaryText,
+                fontWeight: "bold",
+                fontSize: 13
+              }
+            }}
             padding={15}
           />
         </View>
@@ -57,19 +84,3 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.lightbg
-  },
-  heading: {
-    padding: 5,
-    fontSize: 18,
-    color: Colors.impTxt
-  },
-  heading2: {
-    paddingLeft: 8,
-    color: Colors.secondaryTxt
-  }
-});

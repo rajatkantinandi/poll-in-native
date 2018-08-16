@@ -4,8 +4,9 @@ import { Icon } from "expo";
 import TitleBar from "../components/TitleBar";
 import StyledBtn from "../components/StyledBtn";
 import StyledInput from "../components/StyledInput";
-import { Colors } from "../constants/Colors";
 import RequestApi from "../constants/RequestApi";
+import { ColorMode } from "../constants/Colors";
+
 export default class SignInScreen extends React.Component {
   static navigationOptions = {
     title: "Sign In"
@@ -53,6 +54,29 @@ export default class SignInScreen extends React.Component {
     }
   };
   render() {
+    const Colors = ColorMode.getColor();
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        alignItems: "center",
+        backgroundColor: Colors.signInbg
+      },
+      dialogBox: {
+        padding: 5,
+        flex: 0,
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 2
+      },
+      hint: {
+        fontSize: 15,
+        fontWeight: "bold",
+        color: Colors.primaryText,
+        textAlign: "center",
+        margin: 2
+      }
+    });
     return (
       <View style={styles.container}>
         <TitleBar />
@@ -114,25 +138,3 @@ export default class SignInScreen extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: Colors.signInbg
-  },
-  dialogBox: {
-    padding: 5,
-    flex: 0,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 2
-  },
-  hint: {
-    fontSize: 15,
-    fontWeight: "bold",
-    color: Colors.primaryText,
-    textAlign: "center",
-    margin: 2
-  }
-});

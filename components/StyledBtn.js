@@ -5,11 +5,30 @@ import {
   Text,
   ActivityIndicator
 } from "react-native";
-import { Colors } from "../constants/Colors";
 import PropTypes from "prop-types";
-
+import { ColorMode } from "../constants/Colors";
 export default class StyledBtn extends React.Component {
   render() {
+    const Colors = ColorMode.getColor();
+    const styles = StyleSheet.create({
+      btn: {
+        marginLeft: 6,
+        backgroundColor: Colors.greenBtn,
+        padding: 6,
+        flex: 0,
+        justifyContent: "center",
+        flexDirection: "row",
+        borderRadius: 6,
+        borderColor: Colors.fancyBorder,
+        borderWidth: 1
+      },
+      txt: {
+        paddingLeft: 4,
+        fontWeight: "bold",
+        fontSize: 17
+      }
+    });
+
     return (
       <TouchableOpacity
         onPress={this.props.onPress}
@@ -40,21 +59,3 @@ StyledBtn.defaultProps = {
   title: "Invalid button",
   onPress: null
 };
-const styles = StyleSheet.create({
-  btn: {
-    marginLeft: 6,
-    backgroundColor: Colors.greenBtn,
-    padding: 6,
-    flex: 0,
-    justifyContent: "center",
-    flexDirection: "row",
-    borderRadius: 6,
-    borderColor: Colors.fancyBorder,
-    borderWidth: 1
-  },
-  txt: {
-    paddingLeft: 4,
-    fontWeight: "bold",
-    fontSize: 17
-  }
-});
