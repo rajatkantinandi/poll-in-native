@@ -66,6 +66,15 @@ export default class Posts extends React.Component {
       alert("Error: " + responseDelete.statusText);
     }
   };
+  componentWillReceiveProps = nextProps => {
+    let posts = this.state.posts;
+    posts = posts.map(item => {
+      const modifiedItem = item;
+      item.theme = nextProps.theme;
+      return modifiedItem;
+    });
+    setTimeout(() => this.setState({ posts: posts }), 200);
+  };
   render() {
     const Colors = ColorMode.getColor();
     const styles = StyleSheet.create({
@@ -129,7 +138,20 @@ export default class Posts extends React.Component {
               <Icon.Ionicons
                 name="md-create"
                 color={Colors.iconColor2}
-                size={20}
+                size={25}
+              />
+            </ActionButton.Item>
+          )}
+          {this.props.demoMode && (
+            <ActionButton.Item
+              buttonColor={Colors.infoBtn}
+              title="About"
+              onPress={() => this.props.navigation.navigate("About")}
+            >
+              <Icon.Ionicons
+                name="md-information-circle"
+                color={Colors.iconColor2}
+                size={25}
               />
             </ActionButton.Item>
           )}
@@ -141,7 +163,7 @@ export default class Posts extends React.Component {
             <Icon.Ionicons
               name="md-refresh"
               color={Colors.iconColor2}
-              size={20}
+              size={25}
             />
           </ActionButton.Item>
         </ActionButton>

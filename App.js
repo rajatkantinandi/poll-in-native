@@ -16,7 +16,14 @@ const Colors = ColorMode.getColor();
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
-    appNavigator: null
+    appNavigator: null,
+    theme: "light",
+    changeTheme: async () => {
+      const theme = this.state.theme == "light" ? "dark" : "light";
+      this.setState({ theme });
+      ColorMode.setColor(theme);
+      await AsyncStorage.setItem("theme", theme);
+    }
   };
 
   render() {
@@ -32,7 +39,12 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <this.state.appNavigator screenProps={{ theme: "light" }} />
+          <this.state.appNavigator
+            screenProps={{
+              theme: this.state.theme,
+              changeTheme: this.state.changeTheme
+            }}
+          />
         </View>
       );
     }
@@ -70,6 +82,7 @@ export default class App extends React.Component {
     }
     this.setState({
       isLoadingComplete: true,
+      theme: theme,
       appNavigator: createSwitchNavigator(
         {
           Login: LoginTabNavigator,

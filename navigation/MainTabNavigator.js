@@ -129,8 +129,13 @@ AboutStack.navigationOptions = {
   )
 };
 
-export default createBottomTabNavigator({
-  PostsStack,
-  UserStack,
-  AboutStack
-});
+export default createBottomTabNavigator(
+  {
+    PostsStack,
+    UserStack,
+    AboutStack
+  },
+  {
+    lazyLoad: true
+  }
+);

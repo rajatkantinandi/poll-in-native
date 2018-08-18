@@ -6,14 +6,15 @@ const ColorClass = mode => {
     impTxt: "#422",
     btnText: "#ccc",
     blueBtn: "#229",
+    infoBtn: "#75c",
     maroonBtn: "#322",
-    greenBtn: "#191",
-    navyInput: "#fff",
-    bloodInput: "#fff",
-    newInput: "#fff",
+    greenBtn: "#292",
+    navyInput: "#eef",
+    bloodInput: "#eff",
+    newInput: "#efe",
     lightbg: "#eee",
     darkbg: "#bbb",
-    optionbg: "#aaa",
+    optionbg: "#bbc",
     optionbgChecked: "#afa",
     optiontxt: "#000",
     optiontxtChecked: "#333",
@@ -37,14 +38,15 @@ const ColorClass = mode => {
     secondaryTxt: "#999",
     impTxt: "#e99",
     btnText: "#ccc",
-    blueBtn: "#115",
-    maroonBtn: "#300",
-    greenBtn: "#151",
+    blueBtn: "#44a",
+    maroonBtn: "#622",
+    greenBtn: "#3a3",
+    infoBtn: "#75c",
     navyInput: "#235",
-    bloodInput: "#212110",
+    bloodInput: "#410",
     newInput: "#152",
     lightbg: "#555",
-    darkbg: "#112",
+    darkbg: "#113",
     optionbg: "#353528",
     optionbgChecked: "#8f8",
     optiontxt: "#eee",
@@ -53,7 +55,7 @@ const ColorClass = mode => {
     donebg: "#235",
     resultBtnbg: "#126",
     shareBtnbg: "#266",
-    usericon: "#f5f",
+    usericon: "#faf",
     titleBarbg: "#e6e6fa",
     headerTintColor: "#333",
     demoTabbg: "#303",
@@ -68,6 +70,9 @@ const ColorClass = mode => {
 ColorClass.prototype.getColor = () => {
   if (this.mode) return this.mode == "light" ? this.LightMode : this.DarkMode;
   else return this.LightMode;
+};
+ColorClass.prototype.getColorFromMode = mode => {
+  return mode == "light" ? this.LightMode : this.DarkMode;
 };
 ColorClass.prototype.setColor = mode => {
   this.mode = mode;

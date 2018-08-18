@@ -3,9 +3,6 @@ import { TouchableOpacity, StyleSheet, Text } from "react-native";
 import PropTypes from "prop-types";
 import { ColorMode } from "../constants/Colors";
 export default class Option extends React.Component {
-  state = {
-    Colors: ColorMode.getColor()
-  };
   handlePress = () => {
     this.props.handlePress(this.props.idx);
   };

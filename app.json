@@ -1,13 +1,12 @@
 {
   "expo": {
     "name": "Poll-in",
-    "description":
-      "freeCodeCamp Voting app with react Native for https://poll-in.herokuapp.com",
+    "description": "freeCodeCamp Voting app with react Native for https://poll-in.herokuapp.com",
     "slug": "poll-in",
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
-    "version": "1.2.0",
+    "version": "1.4.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {

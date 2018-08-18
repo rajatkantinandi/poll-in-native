@@ -73,6 +73,8 @@ export default class HomeScreen extends React.Component {
           navigation={this.props.navigation}
           fetchPosts={this.fetchPosts}
           loggedIn={false}
+          demoMode={false}
+          theme={this.props.screenProps.theme}
         />
       </View>
     );

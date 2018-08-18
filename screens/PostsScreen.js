@@ -48,6 +48,8 @@ export default class HomeScreen extends React.Component {
         authUser={this.state.authUser}
         authUserId={this.state.authUserId}
         loggedIn={true}
+        demoMode={false}
+        theme={this.props.screenProps.theme}
       />
     );
   }

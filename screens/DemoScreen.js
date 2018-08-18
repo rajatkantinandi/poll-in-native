@@ -48,6 +48,7 @@ export default class DemoScreen extends React.Component {
           navigation={this.props.navigation}
           fetchPosts={this.fetchPosts}
           loggedIn={false}
+          demoMode={true}
         />
       </View>
     );

@@ -14,6 +14,7 @@ import SignUpScreen from "../screens/SignUpScreen";
 import ResultScreen from "../screens/ResultScreen";
 import DemoScreen from "../screens/DemoScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import AboutScreen from "../screens/AboutScreen";
 
 SignInScreen.navigationOptions = {
   tabBarLabel: "Sign In",
@@ -41,15 +42,38 @@ SignUpScreen.navigationOptions = {
     />
   )
 };
+const AboutStack = createStackNavigator(
+  {
+    About: AboutScreen
+  },
+  {
+    initialRouteName: "About"
+  }
+);
+AboutStack.navigationOptions = {
+  tabBarLabel: "About",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === "ios"
+          ? `ios-information-circle${focused ? "" : "-outline"}`
+          : "md-information-circle"
+      }
+    />
+  )
+};
 const AccessNav = createBottomTabNavigator({
   SignInScreen,
-  SignUpScreen
+  SignUpScreen,
+  AboutScreen: AboutStack
 });
 const DemoNav = createStackNavigator(
   {
     DemoScreen,
     Result: ResultScreen,
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    About: AboutScreen
   },
   {
     initialRouteName: "DemoScreen",
